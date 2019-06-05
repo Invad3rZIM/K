@@ -1,8 +1,5 @@
 package main
 
-//need to 1. read input
-//2
-
 import (
 	"bufio"
 	"fmt"
