@@ -7,6 +7,8 @@ import (
 	"os"
 )
 
+const whiteSpace = 32
+
 func main() {
 	words, err := parseFile(os.Args[1])
 
@@ -56,47 +58,47 @@ func parse(str string) []string {
 	var words []string
 
 	start, end := 0, 0
-	state := 0
+	state := "looking"
 
 	i := 0
 
 	for i < len(runes) {
 		r = int(runes[i])
 		//state 0 => we don't have a start index yet
-		if state == 0 {
-			if r != 32 {
-				if r == 40 || r == 41 { // parenthesis
+		if state == "looking" {
+			if r != whiteSpace {
+				if isParenthesis(r) { // parenthesis
 					words = append(words, string(runes[i]))
 					i++
-					state = 0
+					state = "looking"
 					continue
-				} else if (r >= 65 && r <= 90) || (r >= 97 && r <= 122) { //letters
+				} else if isLetter(r) { //letters
 					start = i
 					end = -1
-					state = 1
-				} else if r >= 48 && r <= 57 { //integers
+					state = "letter"
+				} else if isNumber(r) { //integers
 					start = i
 					end = -1
-					state = 2
+					state = "number"
 				}
 			}
-		} else if state == 1 { //start index maps to a letter
-			if !((r >= 65 && r <= 90) || (r >= 97 && r <= 122)) {
-				if r >= 48 && r <= 57 {
-					state = 2
+		} else if state == "letter" { //start index maps to a letter
+			if !isLetter(r) {
+				if isNumber(r) {
+					state = "number"
 				} else {
 					end = i
 					words = append(words, string(runes[start:end]))
-					state = 0
+					state = "looking"
 					continue
 				}
 			} else {
 			}
-		} else if state == 2 { //only numbers can be tokenized at this point
-			if r < 48 || r > 57 {
+		} else if state == "number" { //only numbers can be tokenized at this point
+			if !isNumber(r) {
 				end = i
 				words = append(words, string(runes[start:end]))
-				state = 0
+				state = "looking"
 				continue
 			}
 		}
@@ -109,4 +111,16 @@ func parse(str string) []string {
 	}
 
 	return words
+}
+
+func isNumber(ascii int) bool {
+	return ascii >= 48 && ascii <= 57
+}
+
+func isLetter(ascii int) bool {
+	return (ascii >= 65 && ascii <= 90) || (ascii >= 97 && ascii <= 122)
+}
+
+func isParenthesis(ascii int) bool {
+	return ascii == 40 || ascii == 41
 }
