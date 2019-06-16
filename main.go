@@ -19,7 +19,10 @@ func main() {
 		log.Panic(err)
 	}
 
-	parseMap.iterate()
+	tree := NewParseTree(parseMap)
+
+	tree.root.print()
+
 }
 
 func readFile(fileName string) (*ParseMap, error) {

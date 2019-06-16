@@ -30,7 +30,7 @@ func (pm *ParseMap) tokenize() {
 			if word == "let" {
 				token = "IDBind"
 			} else if word == "true" || word == "false" {
-				token = "IDBoo"
+				token = "IDBool"
 			} else {
 				token = "IDFree"
 			}
@@ -72,7 +72,6 @@ func (pm *ParseMap) tokenize() {
 				break
 			}
 			break
-
 		case "lsep":
 			token = "ParenLeft"
 			break

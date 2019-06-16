@@ -1,8 +1,5 @@
-(let A ( + 4 3 ) )
+( let ( A 4 ) )
 
-(let B ( + A A A ) )
+( let ( B ( + ( A 3 ) )))
 
-( print B )
-
-
-bool true % % %
+( + ( A B ))

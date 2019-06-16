@@ -4,7 +4,7 @@ var operators map[string]bool
 
 //Load keywords
 func init() {
-	ops := []string{"+", "-", "*", "/", "P", "C", "!", ".", "%", "=", "&", "|", "^"}
+	ops := []string{"+", "-", "*", "/", "!", ".", "%", "=", "&", "|", "^"}
 	operators = make(map[string]bool)
 
 	for _, o := range ops {
