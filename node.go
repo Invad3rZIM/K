@@ -21,7 +21,7 @@ func (n *Node) print() {
 		fmt.Println(n.token)
 	}
 	if n.left != nil && n.right == nil {
-		fmt.Println(n.token, n.left)
+		fmt.Println(n.left, n.token)
 	}
 
 	if n.left != nil {
