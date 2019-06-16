@@ -12,6 +12,7 @@ We now have a parse tree!
 ( + ( A B ))
 
 ```
+translates to the following parsetree => 
 ```
 &{0xc420086600 0xc420086480  } &{0xc4200864b0 0xc420086540  }
 &{0xc4200862d0 <nil>  } &{0xc420086300 0xc420086450  }
