@@ -1,6 +1,8 @@
-0.42
-42
-.42
-42.
-"42"
-(    forty2        4two)
+(let A ( + 4 3 ) )
+
+(let B ( + A A A ) )
+
+( print B )
+
+
+bool true % % %
