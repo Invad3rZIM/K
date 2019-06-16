@@ -31,6 +31,7 @@ forty2 - identifier
 two - identifier
 ) - separator
 ```
+<<<<<<< HEAD
 
 
 parse tree
@@ -67,3 +68,5 @@ A
 A
 B
 ```
+=======
+>>>>>>> 35fbd46a0ec55ccf0d144352005008b128804d36
