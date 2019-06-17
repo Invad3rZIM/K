@@ -11,18 +11,18 @@ type Node struct {
 
 func (n *Node) print() {
 
-	if n.left != nil && n.right != nil {
-		fmt.Println(n.left, n.right)
-	}
-	if n.left == nil && n.right != nil {
-		fmt.Println(n.token, n.right)
-	}
+	// if n.left != nil && n.right != nil {
+	// 	fmt.Println(n.left, n.right)
+	// }
+	// if n.left == nil && n.right != nil {
+	// 	fmt.Println(n.token, n.right)
+	// }
 	if n.left == nil && n.right == nil {
-		fmt.Println(n.token)
+		fmt.Println(n.token, n.lexeme)
 	}
-	if n.left != nil && n.right == nil {
-		fmt.Println(n.left, n.token)
-	}
+	// if n.left != nil && n.right == nil {
+	// 	fmt.Println(n.left, n.token)
+	// }
 
 	if n.left != nil {
 		n.left.print()
@@ -80,7 +80,7 @@ func Treeify(words []string, tokens *map[string]string) *Node {
 
 		//At this point, leftStart and i will both be ( and )
 		leftChild = Treeify(words[leftStart:i], tokens)
-	} else {
+	} else { //if the left child is a leaf
 		leftChild = &Node{token: words[leftStart], lexeme: (*tokens)[words[leftStart]]}
 	}
 
@@ -104,14 +104,14 @@ func Treeify(words []string, tokens *map[string]string) *Node {
 
 		//At this point, recurse into the right branch
 		rightChild = Treeify(words[i:rightEnd+1], tokens)
-	} else {
+	} else { //if the right child is a leaf...
 		rightChild = &Node{token: words[rightEnd], lexeme: (*tokens)[words[rightEnd]]}
 	}
 
 	return &Node{left: leftChild, right: rightChild}
 }
 
-//Given an order and the tokens, returns a parallel array of all the newline starts&ends
+//Given an order and the tokens, returns parallel arrays of all the newline starts&ends
 func GetNewLineIndices(order []string, tokens map[string]string) (*[]int, *[]int) {
 	starts := []int{}
 	ends := []int{}
